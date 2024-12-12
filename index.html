@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <title>Viagem Gramado</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .background-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .content-container {
+            position: relative;
+            z-index: 1;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: #fff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #countdown_dashboard {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
+
+        .dashp {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 120px;
+            height: 120px;
+            border: 1px solid #fff;
+            border-radius: 15px;
+            text-shadow: 1px 1px 1px black;
+            padding: 10px;
+        }
+
+        .dashp p {
+            font-size: 50px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .dashp .dashtitle {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        h1 {
+            font-size: 60px;
+            text-shadow: 1px 1px 1px black;
+        }
+
+        h3 {
+            font-size: 25px;
+            text-shadow: 1px 1px 1px black;
+        }
+
+        h4 {
+            font-size: 20px;
+            padding-top: 30px;
+            text-shadow: 1px 1px 1px black;
+        }
+
+        /* Estilos para telas menores */
+        @media (max-width: 768px) {
+            .background-container {
+                background-image: url('https://i.pinimg.com/736x/2e/33/5e/2e335eb80ee4e9cb605b090e2e4b5418.jpg');
+                background-size: cover;
+                background-position: center;
+            }
+
+            .background-image {
+                display: none;
+            }
+
+            h1 {
+                font-size: 50px;
+            }
+
+            h3 {
+                font-size: 20px;
+            }
+
+            h4 {
+                font-size: 18px;
+            }
+
+            .dashp {
+                width: 80px;
+                height: 80px;
+            }
+
+            .dashp p {
+                font-size: 30px;
+            }
+
+            .dashp .dashtitle {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="background-container">
+        <img class="background-image" src="https://imgmd.net/images/c_limit%2Cw_1200/v1/guia/1704569/gramado.jpg" alt="Background Image">
+    </div>
+
+    <div class="content-container">
+        <div class="container">
+            <h1>Partiu, Gramado!</h1>
+            <h3>Contando os dias para pegar a estrada</h3>
+            <h4>Faltam exatamente ↓</h4>
+
+            <div id="countdown_dashboard">
+                <div class="dashp">
+                    <p id="days"></p>
+                    <span class="dashtitle">Dias</span>
+                </div>
+
+                <div class="dashp">
+                    <p id="hours"></p>
+                    <span class="dashtitle">Horas</span>
+                </div>
+
+                <div class="dashp">
+                    <p id="minutes"></p>
+                    <span class="dashtitle">Minutos</span>
+                </div>
+
+                <div class="dashp">
+                    <p id="seconds"></p>
+                    <span class="dashtitle">Segundos</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function countdown() {
+            var now = new Date();
+            var eventDate = new Date("Mar 12, 2025 06:20:00");
+
+            var currentTime = now.getTime();
+            var eventTime = eventDate.getTime();
+            var remTime = eventTime - currentTime;
+
+            var d = Math.floor(remTime / (1000 * 60 * 60 * 24));
+            var h = Math.floor((remTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var m = Math.floor((remTime % (1000 * 60 * 60)) / (1000 * 60));
+            var s = Math.floor((remTime % (1000 * 60)) / 1000);
+
+            document.getElementById("days").textContent = d;
+            document.getElementById("hours").textContent = h;
+            document.getElementById("minutes").textContent = m;
+            document.getElementById("seconds").textContent = s;
+
+            setTimeout(countdown, 1000);
+
+            if (remTime < 0) {
+                clearInterval(countdown);
+                document.getElementById("days").innerHTML = "DIA";
+                document.getElementById("hours").innerHTML = "DA";
+                document.getElementById("minutes").innerHTML = "VIA";
+                document.getElementById("seconds").innerHTML = "GEM";
+            }
+        }
+
+        countdown();
+    </script>
+
+</body>
+
+</html>
